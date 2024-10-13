@@ -15,6 +15,4 @@ Style{heading_color=rose_pink;} <br/>
 
 
 Things we need to fix: <br/>
-- output format is (Type, Value) not <Type, Value> <br/>
-- currently time is literally any <=5-char string comprised of numbers and ':' char <br/>
 - not sure if this is something we need to fix, but there is no main "loop". You have to run program every time you want to try new input. <br/>
