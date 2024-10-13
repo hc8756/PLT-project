@@ -60,10 +60,14 @@ def transition_from_S2 (current_char):
         return 'KEYWORD_OR_LITERAL'
     if current_char.isdigit() or current_char==':': # right now any <=4-char combination of numbers and ':'
         temp += current_char
-        if len(temp) >= 5:
-            tokens.append(('Time', temp))
-            temp = ""
-            return 'S0'
+        if len(temp) == 5:
+            hours = temp[:2]
+            minutes = temp[3:]
+            if hours.isdigit() and minutes.isdigit(): 
+                if 0 <= int(hours) <= 23 and 0 <= int(minutes) <= 59:
+                    tokens.append(('Time', temp))
+                    temp = ""
+                    return 'S0'
         return 'TIME'
     elif current_char in '{"}";':
         tokens.append(('Time', temp))
