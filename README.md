@@ -16,6 +16,8 @@ Garfield ate a lasagna <br/>
 Garfield ate a CONT lasagna <br/> 
 Style{heading_color=rose_pink;} <br/>
 
+Detailed description of each step: <br/>
+
 
 Things we need to fix: <br/>
 - not sure if this is something we need to fix, but there is no main "loop". You have to run program every time you want to try new input. <br/>
