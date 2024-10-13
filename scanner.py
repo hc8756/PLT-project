@@ -106,5 +106,5 @@ def lexer(input_program):
 input_program = input("Please enter something: ")
 lexer(input_program)
 for token in tokens:
-    print("<" + token[0] + ", \"" + token[1] + "\">")
+    print("<" + token[0] + ", \"" + token[1] + "\">\n")
 
