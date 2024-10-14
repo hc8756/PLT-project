@@ -16,6 +16,10 @@ Garfield ate a lasagna <br/>
 Garfield ate a CONT lasagna <br/> 
 Style{heading_color=rose_pink;} <br/>
 
+'''
+code
+'''
+
 Detailed description of each step: <br/>
 
 
