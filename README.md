@@ -27,8 +27,24 @@ Monday 12:30 <br/>
 <Time, "12:30">```
 
 Garfield ate a lasagna <br/>
-Garfield ate a CONT lasagna <br/> 
+
+```<Literal, "Garfield ate a lasagna">```
+
+Garfield ate a CONT lasagna <br/>
+
+```<Literal, "Garfield ate a ">
+<Keyword, "CONT">
+<Literal, "lasagna">```
+
 Style{heading_color=rose_pink;} <br/>
+
+```<Keyword, "Style">
+<Delimiter, "{">
+<Keyword, "heading_color">
+<Operator, "=">
+<Keyword, "rose_pink">
+<Delimiter, ";">
+<Delimiter, "}">```
 
 
 Detailed description of each step: <br/>
