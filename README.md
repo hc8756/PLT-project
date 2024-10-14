@@ -25,17 +25,20 @@ Sample inputs that work: <br/>
 Monday 12:30 <br/>
 
 ```<Keyword, "Monday">
-<Time, "12:30">```
+<Time, "12:30">
+```
 
 Garfield ate a lasagna <br/>
 
-```<Literal, "Garfield ate a lasagna">```
+```<Literal, "Garfield ate a lasagna">
+```
 
 Garfield ate a CONT lasagna <br/>
 
 ```<Literal, "Garfield ate a ">
 <Keyword, "CONT">
-<Literal, "lasagna">```
+<Literal, "lasagna">
+```
 
 Style{heading_color=rose_pink;} <br/>
 
@@ -45,8 +48,14 @@ Style{heading_color=rose_pink;} <br/>
 <Operator, "=">
 <Keyword, "rose_pink">
 <Delimiter, ";">
-<Delimiter, "}">```
+<Delimiter, "}">
+```
+12@30 
 
+
+```Unrecognized character. We are at position 3
+<Literal, "12">
+```
 
 Detailed description of each step: <br/>
 
