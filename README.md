@@ -12,14 +12,14 @@ Operators: - | = | # <br/>
 Sample inputs that work: <br/>
 "Get Ready"= CONT-9:00; <br/>
 
-`<Delimiter, """> <br/>
+```<Delimiter, """> 
 <Literal, "Get Ready">
 <Delimiter, """>
 <Operator, "=">
 <Keyword, "CONT">
 <Operator, "-">
 <Time, "9:00">
-<Delimiter, ";">`
+<Delimiter, ";">```
 
 Monday 12:30 <br/>
 Garfield ate a lasagna <br/>
