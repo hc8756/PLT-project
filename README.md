@@ -12,7 +12,8 @@ Operators: - | = | # <br/>
 Sample inputs that work: <br/>
 "Get Ready"= CONT-9:00; <br/>
 
-```<Delimiter, """> 
+```
+<Delimiter, """> 
 <Literal, "Get Ready">
 <Delimiter, """>
 <Operator, "=">
@@ -24,25 +25,29 @@ Sample inputs that work: <br/>
 
 Monday 12:30 <br/>
 
-```<Keyword, "Monday">
+```
+<Keyword, "Monday">
 <Time, "12:30">
 ```
 
 Garfield ate a lasagna <br/>
 
-```<Literal, "Garfield ate a lasagna">
+```
+<Literal, "Garfield ate a lasagna">
 ```
 
 Garfield ate a CONT lasagna <br/>
 
-```<Literal, "Garfield ate a ">
+```
+<Literal, "Garfield ate a ">
 <Keyword, "CONT">
 <Literal, "lasagna">
 ```
 
 Style{heading_color=rose_pink;} <br/>
 
-```<Keyword, "Style">
+```
+<Keyword, "Style">
 <Delimiter, "{">
 <Keyword, "heading_color">
 <Operator, "=">
@@ -52,12 +57,13 @@ Style{heading_color=rose_pink;} <br/>
 ```
 12@30 
 
-
-```Unrecognized character. We are at position 3
+```
+Unrecognized character. We are at position 3
 <Literal, "12">
 ```
 
 Detailed description of each step: <br/>
+
 
 
 Things we need to fix: <br/>
