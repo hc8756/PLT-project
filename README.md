@@ -19,7 +19,8 @@ Sample inputs that work: <br/>
 <Keyword, "CONT">
 <Operator, "-">
 <Time, "9:00">
-<Delimiter, ";">```
+<Delimiter, ";">
+```
 
 Monday 12:30 <br/>
 
