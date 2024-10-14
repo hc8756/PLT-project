@@ -22,11 +22,14 @@ Sample inputs that work: <br/>
 <Delimiter, ";">```
 
 Monday 12:30 <br/>
+
+```<Keyword, "Monday">
+<Time, "12:30">```
+
 Garfield ate a lasagna <br/>
 Garfield ate a CONT lasagna <br/> 
 Style{heading_color=rose_pink;} <br/>
 
-`code`
 
 Detailed description of each step: <br/>
 
