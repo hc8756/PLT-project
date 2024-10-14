@@ -64,6 +64,28 @@ Unrecognized character. We are at position 3
 
 Detailed description of each step: <br/>
 
+The lexer uses a state machine with different states (S0, KEYWORD_OR_LITERAL, TIME, ERROR) to process the input. Each state defines a specific behavior based on the character being read:
+
+S0 (Initial State):
+The lexer starts in state S0 and reads each character from the input.
+If it reads an alphabetic character or an underscore (_), it transitions to KEYWORD_OR_LITERAL and starts collecting characters for a possible keyword or literal.
+If it reads a digit, it transitions to the TIME state and begins parsing a time token.
+If it reads a delimiter or operator, it directly appends the token to the tokens list and remains in state S0.
+If an unrecognized character is encountered, it transitions to the ERROR state.
+
+KEYWORD_OR_LITERAL (S1):
+This state evaluates whether the current characters form a keyword or a literal.
+If a keyword is found within the collected string, it splits the string into a literal (if any) and the keyword, appending both to the tokens list.
+If no keyword is found, it continues appending characters until a delimiter, operator, or space is encountered, at which point the collected string is assumed to be a literal.
+
+TIME (S2):
+This state attempts to parse a valid time in the format HH:MM.
+It checks if the characters form a valid hour and minute combination. If they do, it appends the token as Time. If the characters do not match the time format, it transitions back to KEYWORD_OR_LITERAL since the digits could be part of a literal instead.
+ERROR:
+
+When the lexer encounters an unrecognized character, it moves to the ERROR state and prints an error message indicating the position of the problematic character in the input. This halts further processing.
+
+After appending tokens it outputs them along with their token type. 
 
 
 Things we need to fix: <br/>
