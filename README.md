@@ -12,7 +12,7 @@ Operators: - | = | # <br/>
 Sample inputs that work: <br/>
 "Get Ready"= CONT-9:00; <br/>
 
-`<Delimiter, """>
+`<Delimiter, """> <br/>
 <Literal, "Get Ready">
 <Delimiter, """>
 <Operator, "=">
