@@ -87,6 +87,11 @@ When the lexer encounters an unrecognized character, it moves to the ERROR state
 
 After appending tokens it outputs them along with their token type. 
 
+To run: 
+make sure python is installed
+run python scanner.py
+or 
+shelll script
 
 Things we need to fix: <br/>
 - not sure if this is something we need to fix, but there is no main "loop". You have to run program every time you want to try new input. <br/>
