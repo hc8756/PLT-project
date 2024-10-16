@@ -1,8 +1,8 @@
 # PLT-project
 
-# Team members: Anita Bui-Martinez (adb2221) and Ashley Cho (hc3455)
+## Team members: Anita Bui-Martinez (adb2221) and Ashley Cho (hc3455)
 
-# To run: 
+## To run: 
 make sure python is installed <br/>
 run `python scanner.py`
 or run the shell script
@@ -69,7 +69,7 @@ Unrecognized character. We are at position 3
 <Literal, "12">
 ```
 
-# Description of each step: <br/>
+## Description of each step: <br/>
 
 The lexer uses a state machine with different states (S0, KEYWORD_OR_LITERAL, TIME, ERROR) to process the input. Each state defines a specific behavior based on the character being read:
 
