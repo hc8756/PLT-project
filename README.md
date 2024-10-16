@@ -3,7 +3,8 @@
 ## Team members: Anita Bui-Martinez (adb2221) and Ashley Cho (hc3455)
 
 ### To run: 
-make sure python is installed <br/>
+Ensure python is installed <br/>
+You can do this on Windows or Mac by downloading from: https://www.python.org/downloads/ <br/> 
 run `python scanner.py`
 or run the shell script
 `./run_lexer.sh`
