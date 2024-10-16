@@ -2,13 +2,13 @@
 
 ## Team members: Anita Bui-Martinez (adb2221) and Ashley Cho (hc3455)
 
-## To run: 
+### To run: 
 make sure python is installed <br/>
 run `python scanner.py`
 or run the shell script
 `./run_lexer.sh`
 
-Lexical Grammar: <br/>
+### Lexical Grammar: <br/>
 Keywords: Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday | Style | CONT | heading_color | rose_pink <br/>  
 Note: for now, we will only implement heading color and color value and add more if successful <br/>
 Literals: [A-Za-z0-9  ]+ <br/>
