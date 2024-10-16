@@ -1,5 +1,12 @@
 # PLT-project
-Team members: Anita Bui-Martinez (adb2221) and Ashley Cho (hc3455)
+
+# Team members: Anita Bui-Martinez (adb2221) and Ashley Cho (hc3455)
+
+# To run: 
+make sure python is installed <br/>
+run `python scanner.py`
+or run the shell script
+`./run_lexer.sh`
 
 Lexical Grammar: <br/>
 Keywords: Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday | Style | CONT | heading_color | rose_pink <br/>  
@@ -62,7 +69,7 @@ Unrecognized character. We are at position 3
 <Literal, "12">
 ```
 
-Detailed description of each step: <br/>
+# Description of each step: <br/>
 
 The lexer uses a state machine with different states (S0, KEYWORD_OR_LITERAL, TIME, ERROR) to process the input. Each state defines a specific behavior based on the character being read:
 
@@ -86,12 +93,3 @@ ERROR:
 When the lexer encounters an unrecognized character, it moves to the ERROR state and prints an error message indicating the position of the problematic character in the input. This halts further processing.
 
 After appending tokens it outputs them along with their token type. 
-
-#To run: 
-make sure python is installed <br/>
-run `python scanner.py`
-or run the shell script
-`./run_lexer.sh`
-
-Things we need to fix: <br/>
-- not sure if this is something we need to fix, but there is no main "loop". You have to run program every time you want to try new input. <br/>
