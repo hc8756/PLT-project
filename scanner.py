@@ -103,8 +103,48 @@ def lexer(input_program):
         tokens.append(('Literal', temp))
     return 0
 
+# Assignment 2 code starts here
+# TODO: implement class for lexer like you did for parser
+
+class Parser:
+    def __init__(self, tokens, curr_pos):
+        self.tokens=tokens
+        self.curr_pos=0
+
+    def current_token(self):
+        if self.curr_pos < len(self.tokens):
+            return self.tokens[self.curr_pos]
+        return None
+
+    def parse(self):
+        return None
+
+# Boilerplate code for creating and representing nodes of tree
+class ASTNode:
+    def __init__(self, node_type, value=None):
+        self.node_type = node_type
+        self.value = value
+        self.children = []
+
+    def add_child(self, child):
+        self.children.append(child)
+
+    def __repr__(self, level=0):
+        indent = "  " * level
+        if self.children:
+            children_repr = "\n".join([child.__repr__(level+1) for child in self.children])
+            return f"{indent}{self.node_type}: {self.value}\n{children_repr}"
+        return f"{indent}{self.node_type}: {self.value}"
+
 input_program = input("Please enter something: ")
 lexer(input_program)
+
+#uncomment to test out lexer
+"""
 for token in tokens:
     print("<" + token[0] + ", \"" + token[1] + "\">\n")
-
+"""
+parser = Parser(tokens)
+ast = parser.parse()
+if ast:
+    print(ast)
