@@ -11,10 +11,14 @@ def main():
     for token in tokens:
         print("<" + token[0] + ", \"" + token[1] + "\">")
     '''
-    parser = Parser(tokens)
-    ast = parser.parse()
-    if ast:
-        print(ast)
+    try:
+        parser = Parser(tokens)
+        ast = parser.parse()
+        if ast:
+            print(ast)
+    except Exception as e:
+        print(e)
+
 
 if __name__ == "__main__":
     main()

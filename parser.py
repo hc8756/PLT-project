@@ -29,8 +29,7 @@ class Parser:
         return None
 
     def syntax_error(self):
-        print("Syntactic error at " + str(self.curr_pos)+". Tree so far:")
-        return None
+        raise Exception(f"Syntactic error at {self.curr_pos}.")
 
     def parse(self):
         if self.current_token() is None: # no input no tree
@@ -41,6 +40,9 @@ class Parser:
         ast = ASTNode("S")
         ast.add_child(self.parse_A())  # Parse block A
         ast.add_child(self.parse_B())  # Parse block B
+        self.curr_pos += 1 # Make sure there isn't anything after
+        if self.current_token() is not None:
+            self.syntax_error()
         return ast
 
     def parse_A(self):
