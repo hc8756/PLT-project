@@ -164,7 +164,6 @@ class Parser:
                 ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
                 self.curr_pos += 1
                 ast.add_child(self.parse_SCH())
-                #self.curr_pos += 1
                 if self.current_token() is not None and self.current_token()[1]=="}":
                     ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
                     self.curr_pos += 1
@@ -197,7 +196,7 @@ class Parser:
                             if self.current_token() is not None and self.current_token()[1] == ";":
                                 ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
                                 self.curr_pos += 1
-                                ast.add_child(self.parse_SCH())
+                                ast.add_child(self.parse_C())
                                 return ast
                             else:
                                 self.syntax_error()
@@ -210,14 +209,37 @@ class Parser:
         else:
             return None
 
+    def parse_COM(self):
+        ast = ASTNode("COM")
+        if self.current_token() is not None and self.current_token()[1] == '#':
+            ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
+            self.curr_pos+=1
+            if self.current_token() is not None and self.current_token()[0] == "Literal":
+                ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
+                self.curr_pos += 1
+                ast.add_child(self.parse_C())
+                return ast
+            else:
+                self.syntax_error()
+
+    #return result of parse_SCH, parse_COM, or nothing depending on first of input
+    def parse_C(self):
+        if self.current_token() is not None and self.current_token()[1] == '#':
+            return self.parse_COM()
+        elif self.current_token() is not None and self.current_token()[0] == 'Literal':
+            return self.parse_SCH()
+        else:
+            return None
+
 input_program = input("Please enter something: ")
 lexer(input_program)
 
 #uncomment to test out lexer
-"""
+'''
 for token in tokens:
     print("<" + token[0] + ", \"" + token[1] + "\">")
-"""
+'''
+
 parser = Parser(tokens)
 ast = parser.parse()
 if ast:
