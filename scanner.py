@@ -42,7 +42,7 @@ def transition_from_S1(current_char):
                 return 'S0'
         else:
             return 'KEYWORD_OR_LITERAL'
-    elif current_char in '{"}";':
+    elif current_char in '{};':
         tokens.append(('Literal', temp))
         tokens.append(('Delimiter', current_char))
         temp = ""
@@ -72,7 +72,7 @@ def transition_from_S2 (current_char):
                     temp = ""
                     return 'S0'
         return 'TIME'
-    elif current_char in '{"}";':
+    elif current_char in '{};':
         tokens.append(('Time', temp))
         tokens.append(('Delimiter', current_char))
         temp = ""
@@ -108,7 +108,7 @@ def lexer(input_program):
 
 # Assignment 2 code starts here
 # TODO: implement class for lexer like you did for parser
-# TODO: change language to not recognize quotations, they serve no function
+# TODO: change documentation to not recognize quotations, they serve no function
 # TODO: move parser to its own script
 # TODO: create a main script that imports scanner and parser
 
@@ -140,6 +140,10 @@ class Parser:
             return self.tokens[self.curr_pos]
         return None
 
+    def syntax_error(self):
+        print("Syntactic error at " + str(self.curr_pos)+". Tree so far:")
+        return None
+
     def parse(self):
         if self.current_token() is None: # no input no tree
             return None
@@ -153,36 +157,58 @@ class Parser:
 
     def parse_A(self):
         ast = ASTNode("A")
-        if self.current_token() is None:
-            return ast
-        if self.current_token()[1] in days:
+        if self.current_token() is not None and self.current_token()[1] in days:
             ast.add_child(ASTNode('WD',self.current_token()[1]))
             self.curr_pos += 1
             if self.current_token() is not None and self.current_token()[1]=="{":
                 ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
                 self.curr_pos += 1
-                if self.current_token() is not None and self.current_token()[0]=='Literal':
-                    #ast.add_child(parse_SCH())
+                ast.add_child(self.parse_SCH())
+                #self.curr_pos += 1
+                if self.current_token() is not None and self.current_token()[1]=="}":
+                    ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
                     self.curr_pos += 1
-                    if self.current_token() is not None and self.current_token()[1]=="}":
-                        ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
-                        self.curr_pos += 1
-                        ast.add_child(self.parse_A())
-                        return ast
-                    else:
-                        self.syntax_error()
+                    ast.add_child(self.parse_A())
+                    return ast
                 else:
                     self.syntax_error()
             else:
                 self.syntax_error()
         else:
-            self.syntax_error()
+            return None
 
-    def syntax_error(self):
-        print("Syntactic error at " + str(self.curr_pos))
-        for token in self.tokens:
-            print("<" + token[0] + ", \"" + token[1] + "\">\n")
-        return None
+    def parse_SCH(self):
+        ast = ASTNode("SCH")
+        if self.current_token() is not None and self.current_token()[0] == 'Literal':
+            ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1])) # add the triggering literal
+            self.curr_pos+=1
+            if self.current_token() is not None and self.current_token()[1] == "=":
+                ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
+                self.curr_pos += 1
+                if self.current_token() is not None and (self.current_token()[0] =="Time" or self.current_token()[1] =="CONT"):
+                    ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
+                    self.curr_pos += 1
+                    if self.current_token() is not None and self.current_token()[1] == "-":
+                        ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
+                        self.curr_pos += 1
+                        if self.current_token() is not None and self.current_token()[0] =="Time":
+                            ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
+                            self.curr_pos += 1
+                            if self.current_token() is not None and self.current_token()[1] == ";":
+                                ast.add_child(ASTNode(self.current_token()[0], self.current_token()[1]))
+                                self.curr_pos += 1
+                                ast.add_child(self.parse_SCH())
+                                return ast
+                            else:
+                                self.syntax_error()
+                        else:
+                            self.syntax_error()
+                    else:
+                        self.syntax_error()
+            else:
+                self.syntax_error()
+        else:
+            return None
 
 input_program = input("Please enter something: ")
 lexer(input_program)
@@ -190,7 +216,7 @@ lexer(input_program)
 #uncomment to test out lexer
 """
 for token in tokens:
-    print("<" + token[0] + ", \"" + token[1] + "\">\n")
+    print("<" + token[0] + ", \"" + token[1] + "\">")
 """
 parser = Parser(tokens)
 ast = parser.parse()
