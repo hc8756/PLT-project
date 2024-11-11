@@ -248,3 +248,42 @@ Friday{task1=8:00-9:00 task2=10:00-11:00;}Style{font_color=red;}
 Syntactic error at 6.
 ```
 
+### Example of correct input - nexted schedule and multiple comments: 
+Tuesday{meeting=10:00-11:00;work=11:00-12:00;# Prepare slides # Check projector}Style{heading_color=rose_pink;} 
+```
+S:
+  A:
+    WD: Tuesday
+    Delimiter: {
+    SCH:
+      Literal: meeting
+      Operator: =
+      Time: 10:00
+      Operator: -
+      Time: 11:00
+      Delimiter: ;
+      SCH:
+        Literal: work
+        Operator: =
+        Time: 11:00
+        Operator: -
+        Time: 12:00
+        Delimiter: ;
+        COM:
+          Operator: #
+          Literal: Prepare slides
+          COM:
+            Operator: #
+            Literal: Check projector
+    Delimiter: }
+  B:
+    Keyword: Style
+    Delimiter: {
+    ST:
+      EL: heading_color
+      Operator: =
+      VAL: rose_pink
+      Delimiter: ;
+    Delimiter: }
+```
+
