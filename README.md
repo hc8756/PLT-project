@@ -217,7 +217,7 @@ Syntactic error at 12.
 
 ### Another sample of correct input:
 Thursday{lecture=9:00-10:30;study=CONT-12:00;# Complete homework}
-'''
+```
 S:
   A:
     WD: Thursday
@@ -240,11 +240,11 @@ S:
           Operator: #
           Literal: Complete homework
     Delimiter: }
-'''
+```
 
 ### Example of another error - missing semicolon: 
 Friday{task1=8:00-9:00 task2=10:00-11:00;}Style{font_color=red;}
-'''
+```
 Syntactic error at 6.
-'''
+```
 
