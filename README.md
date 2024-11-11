@@ -97,6 +97,22 @@ After appending tokens it outputs them along with their token type.
 
 # Programming Assignment 2 
 
+## To run:
+### Requirements 
+- Python 3 or above
+
+### Installation and Running 
+clone repository 
+cd into it 
+run 
+```
+python main.py
+```
+Enter input to test.
+
+Alternatively, you can run the shell script:
+./run_parser.sh
+
 ## Our CFG
 ### Non-terminals:
 S: Start <br/>
