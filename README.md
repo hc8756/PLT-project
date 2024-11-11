@@ -94,3 +94,42 @@ ERROR:
 When the lexer encounters an unrecognized character, it moves to the ERROR state and prints an error message indicating the position of the problematic character in the input. This halts further processing.
 
 After appending tokens it outputs them along with their token type. 
+
+# Programming Assignment 2 
+
+## Our CFG
+### Non-terminals:
+S: Start 
+A: Block(s) defining day and its schedule
+B: Block defining style
+SCH: a day’s schedule
+COM: comment
+C: non-terminal that follows a line of schedule.
+ST: stylistic element-value pair(s) 
+
+### Terminals would be keywords, literals, times, delimiters, and operators defined in assignment 1. 
+For brevity following abbreviations are used in grammar below…
+WD: terminal keywords
+LIT: terminal literals
+TIME: terminal times
+EL: stylistic element
+VAL: stylistic value
+
+S→AB 
+A→WD{SCH}A | ε 
+SCH→LIT=CONT-TIME;C | LIT=TIME-TIME;C
+COM→ #LITC 
+C→SCH | COM | ε //this pattern ensures that comment always comes after a schedule
+B→Style{ST} | ε //if B is null, we can default style
+ST→EL=VAL;ST | ε
+
+
+## Sample Input Programs 
+
+### Example of correct test case:
+Monday{whatever=8:00-9:00;whatever=CONT-10:00;}Tuesday{whatever=8:00-9:00;whatever=CONT-10:00;#take out laundry today # do not forget to separate dark and white } Wednesday{whatever=8:00-9:00;whatever=CONT-10:00;}Style{heading_color=rose_pink;heading_color=rose_pink;}
+
+### Example of test case that would throw syntax error:
+Monday{whatever=8:00-9:00;whatever=CONT-CONT;}Tuesday{whatever=8:00-9:00;whatever=CONT-10:00;#take out laundry today # do not forget to separate dark and white } Wednesday{whatever=8:00-9:00;whatever=CONT-10:00;}
+//second time cannot be CONT.
+
