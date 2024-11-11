@@ -97,6 +97,8 @@ After appending tokens it outputs them along with their token type.
 
 # Programming Assignment 2 
 
+## Team members: Anita Bui-Martinez (adb2221) and Ashley Cho (hc3455)
+
 ## To run:
 ### Requirements 
 - Python 3 or above
