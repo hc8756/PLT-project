@@ -102,8 +102,7 @@ After appending tokens it outputs them along with their token type.
 - Python 3 or above
 
 ### Installation and Running 
-clone repository 
-cd into it 
+Clone repository and cd into it.
 run 
 ```
 python main.py
