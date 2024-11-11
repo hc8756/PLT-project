@@ -99,29 +99,29 @@ After appending tokens it outputs them along with their token type.
 
 ## Our CFG
 ### Non-terminals:
-S: Start 
-A: Block(s) defining day and its schedule
-B: Block defining style
-SCH: a day’s schedule
-COM: comment
-C: non-terminal that follows a line of schedule.
-ST: stylistic element-value pair(s) 
+S: Start <br/>
+A: Block(s) defining day and its schedule <br/>
+B: Block defining style <br/>
+SCH: a day’s schedule <br/>
+COM: comment <br/>
+C: non-terminal that follows a line of schedule. <br/>
+ST: stylistic element-value pair(s) <br/>
 
 ### Terminals would be keywords, literals, times, delimiters, and operators defined in assignment 1. 
-For brevity following abbreviations are used in grammar below…
-WD: terminal keywords
-LIT: terminal literals
-TIME: terminal times
-EL: stylistic element
-VAL: stylistic value
-
-S→AB 
-A→WD{SCH}A | ε 
-SCH→LIT=CONT-TIME;C | LIT=TIME-TIME;C
-COM→ #LITC 
-C→SCH | COM | ε //this pattern ensures that comment always comes after a schedule
-B→Style{ST} | ε //if B is null, we can default style
-ST→EL=VAL;ST | ε
+For brevity following abbreviations are used in grammar below… <br/>
+WD: terminal keywords <br/>
+LIT: terminal literals <br/>
+TIME: terminal times <br/>
+EL: stylistic element <br/>
+VAL: stylistic value <br/>
+<br/>
+S→AB <br/>
+A→WD{SCH}A | ε <br/>
+SCH→LIT=CONT-TIME;C | LIT=TIME-TIME;C <br/>
+COM→ #LITC <br/>
+C→SCH | COM | ε //this pattern ensures that comment always comes after a schedule <br/>
+B→Style{ST} | ε //if B is null, we can default style <br/>
+ST→EL=VAL;ST | ε <br/>
 
 
 ## Sample Input Programs 
