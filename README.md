@@ -226,9 +226,9 @@ S:
     Delimiter: }
 ```
 
-### Example of test case that would throw syntax error:
-Monday{whatever=8:00-9:00;whatever=CONT-CONT;}Tuesday{whatever=8:00-9:00;whatever=CONT-10:00;#take out laundry today # do not forget to separate dark and white } Wednesday{whatever=8:00-9:00;whatever=CONT-10:00;}
-//second time cannot be CONT.
+### Example of test case that would throw syntax error - second time cannot be CONT.:
+Monday{whatever=8:00-9:00;whatever=CONT-CONT;}Tuesday{whatever=8:00-9:00;whatever=CONT-10:00;#take out laundry today # do not forget to separate dark and white } Wednesday{whatever=8:00-9:00;whatever=CONT-10:00;} </br>
+Output: 
 ```
 Syntactic error at 12.
 ```
