@@ -110,7 +110,7 @@ python main.py
 Enter input to test.
 
 Alternatively, you can run the shell script:
-./run_parser.sh <input>
+./run_parser.sh /<input/>
 
 ## Our CFG
 ### Non-terminals:
