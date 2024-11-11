@@ -129,7 +129,89 @@ ST→EL=VAL;ST | ε
 ### Example of correct test case:
 Monday{whatever=8:00-9:00;whatever=CONT-10:00;}Tuesday{whatever=8:00-9:00;whatever=CONT-10:00;#take out laundry today # do not forget to separate dark and white } Wednesday{whatever=8:00-9:00;whatever=CONT-10:00;}Style{heading_color=rose_pink;heading_color=rose_pink;}
 
+Expected AST: 
+```
+S: 
+  A:
+    WD: Monday
+    Delimiter: {
+    SCH:
+      Literal: whatever
+      Operator: =
+      Time: 8:00
+      Operator: -
+      Time: 9:00
+      Delimiter: ;
+      SCH:
+        Literal: whatever
+        Operator: =
+        Keyword: CONT
+        Operator: -
+        Time: 10:00
+        Delimiter: ;
+    Delimiter: }
+    A:
+      WD: Tuesday
+      Delimiter: {
+      SCH:
+        Literal: whatever
+        Operator: =
+        Time: 8:00
+        Operator: -
+        Time: 9:00
+        Delimiter: ;
+        SCH:
+          Literal: whatever
+          Operator: =
+          Keyword: CONT
+          Operator: -
+          Time: 10:00
+          Delimiter: ;
+          COM:
+            Operator: #
+            Literal: take out laundry today
+            COM:
+              Operator: #
+              Literal: do not forget to separate dark and white
+      Delimiter: }
+      A:
+        WD: Wednesday
+        Delimiter: {
+        SCH:
+          Literal: whatever
+          Operator: =
+          Time: 8:00
+          Operator: -
+          Time: 9:00
+          Delimiter: ;
+          SCH:
+            Literal: whatever
+            Operator: =
+            Keyword: CONT
+            Operator: -
+            Time: 10:00
+            Delimiter: ;
+        Delimiter: }
+  B:
+    Keyword: Style
+    Delimiter: {
+    ST:
+      EL: heading_color
+      Operator: =
+      VAL: rose_pink
+      Delimiter: ;
+      ST:
+        EL: heading_color
+        Operator: =
+        VAL: rose_pink
+        Delimiter: ;
+    Delimiter: }
+```
+
 ### Example of test case that would throw syntax error:
 Monday{whatever=8:00-9:00;whatever=CONT-CONT;}Tuesday{whatever=8:00-9:00;whatever=CONT-10:00;#take out laundry today # do not forget to separate dark and white } Wednesday{whatever=8:00-9:00;whatever=CONT-10:00;}
 //second time cannot be CONT.
+```
+Syntactic error at 12.
+```
 
