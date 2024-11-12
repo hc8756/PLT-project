@@ -209,6 +209,9 @@ S:
     Delimiter: }
 ```
 
+### Demo Video:
+https://columbia.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=03eca195-300f-4a0a-90a0-b226005341a8
+
 ## Programming Assignment 1
 
 ## Team members: Anita Bui-Martinez (adb2221) and Ashley Cho (hc3455)
