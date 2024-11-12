@@ -7,8 +7,8 @@ def main():
     scanner = Scanner()
     tokens=scanner.lexer(input_program)
     # uncomment to test out scanner
-    for token in tokens:
-        print("<" + token[0] + ", \"" + token[1] + "\">")
+    # for token in tokens:
+    #     print("<" + token[0] + ", \"" + token[1] + "\">")
     
     try:
         parser = Parser(tokens)
