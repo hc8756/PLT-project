@@ -220,8 +220,6 @@ https://columbia.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=03eca195-300f-4
 Ensure python is installed <br/>
 You can do this on Windows or Mac by downloading from: https://www.python.org/downloads/ <br/> 
 run `python scanner.py`
-or run the shell script
-`./run_lexer.sh`
 
 ### Lexical Grammar: <br/>
 Keywords: Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday | Style | CONT | heading_color | rose_pink <br/>  
