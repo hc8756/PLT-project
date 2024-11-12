@@ -5,7 +5,7 @@
 # source venv/bin/activate
 
 # Compile the scanner
-gcc -o lexer lexer.c
+gcc -o lexer lexer.py
 
 python scanner.py
 
