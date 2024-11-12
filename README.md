@@ -16,9 +16,9 @@ python main.py
 Enter input to test.
 
 Alternatively, you can run the shell script:
-./run_parser.sh 
-along with an input file to test
-
+```
+.\run_parser.sh
+```
 ## Our CFG
 ### Non-terminals:
 S: Start <br/>
