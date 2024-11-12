@@ -9,16 +9,16 @@
 
 ### Installation and Running 
 Clone repository and cd into it.
-run 
+Run 
 ```
 python main.py
 ```
 Enter input to test.
 
 Alternatively, you can run the shell script:
-./run_parser.sh 
-along with an input file to test
-
+```
+.\run_parser.sh
+```
 ## Our CFG
 ### Non-terminals:
 S: Start <br/>
@@ -220,8 +220,6 @@ https://columbia.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=03eca195-300f-4
 Ensure python is installed <br/>
 You can do this on Windows or Mac by downloading from: https://www.python.org/downloads/ <br/> 
 run `python scanner.py`
-or run the shell script
-`./run_lexer.sh`
 
 ### Lexical Grammar: <br/>
 Keywords: Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday | Style | CONT | heading_color | rose_pink <br/>  
