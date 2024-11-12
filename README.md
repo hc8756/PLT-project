@@ -9,7 +9,7 @@
 
 ### Installation and Running 
 Clone repository and cd into it.
-run 
+Run 
 ```
 python main.py
 ```
