@@ -4,7 +4,6 @@
 
 ## Team members: Anita Bui-Martinez (adb2221) and Ashley Cho (hc3455)
 
-## To run:
 ### Requirements 
 - Python 3 or above
 
