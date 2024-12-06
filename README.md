@@ -17,7 +17,7 @@ Enter input to test.
 
 Alternatively, you can run the shell script:
 ```
-.\run_parser.sh
+.\run_scanner.sh
 ```
 ## Our CFG
 ### Non-terminals:
