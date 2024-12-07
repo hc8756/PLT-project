@@ -1,4 +1,5 @@
 import webbrowser
+import os
 
 class CodeGenerator:
     def __init__(self, ast):
@@ -137,7 +138,8 @@ class CodeGenerator:
     def execute(self, filename="output.html"):
         # display output in browser 
         try:
-            webbrowser.open(filename)
+            abs_path = os.path.abspath(filename)
+            webbrowser.open_new_tab(f"file://{abs_path}")
             print(f"Opened {filename} in web browser.")
         except Exception as e:
             print(f"Error opening file in browser: {str(e)}")
