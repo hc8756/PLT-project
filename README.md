@@ -1,6 +1,6 @@
 # PLT-project
 
-# Programming Assignment 2 
+# Programming Assignment 3 
 
 ## Team members: Anita Bui-Martinez (adb2221) and Ashley Cho (hc3455)
 
@@ -11,298 +11,182 @@
 Clone repository and cd into it.
 Run 
 ```
-python main.py
+python test.py
 ```
 Enter input to test.
 
 Alternatively, you can run the shell script:
 ```
-.\run_scanner.sh
-```
-## Our CFG
-### Non-terminals:
-S: Start <br/>
-A: Block(s) defining day and its schedule <br/>
-B: Block defining style <br/>
-SCH: a day’s schedule <br/>
-COM: comment <br/>
-C: non-terminal that follows a line of schedule. <br/>
-ST: stylistic element-value pair(s) <br/>
-
-### Terminals would be keywords, literals, times, delimiters, and operators defined in assignment 1. 
-For brevity following abbreviations are used in grammar below… <br/>
-WD: terminal keywords <br/>
-LIT: terminal literals <br/>
-TIME: terminal times <br/>
-EL: stylistic element <br/>
-VAL: stylistic value <br/>
-<br/>
-S→AB <br/>
-A→WD{SCH}A | ε <br/>
-SCH→LIT=CONT-TIME;C | LIT=TIME-TIME;C <br/>
-COM→ #LITC <br/>
-C→SCH | COM | ε //this pattern ensures that comment always comes after a schedule <br/>
-B→Style{ST} | ε //if B is null, we can default style <br/>
-ST→EL=VAL;ST | ε <br/>
-
-
-## Sample Input Programs 
-
-### Example of correct test case:
-Monday{whatever=8:00-9:00;whatever=CONT-10:00;}Tuesday{whatever=8:00-9:00;whatever=CONT-10:00;#take out laundry today # do not forget to separate dark and white } Wednesday{whatever=8:00-9:00;whatever=CONT-10:00;}Style{heading_color=rose_pink;heading_color=rose_pink;}
-
-Expected AST: 
-```
-S: 
-  A:
-    WD: Monday
-    Delimiter: {
-    SCH:
-      Literal: whatever
-      Operator: =
-      Time: 8:00
-      Operator: -
-      Time: 9:00
-      Delimiter: ;
-      SCH:
-        Literal: whatever
-        Operator: =
-        Keyword: CONT
-        Operator: -
-        Time: 10:00
-        Delimiter: ;
-    Delimiter: }
-    A:
-      WD: Tuesday
-      Delimiter: {
-      SCH:
-        Literal: whatever
-        Operator: =
-        Time: 8:00
-        Operator: -
-        Time: 9:00
-        Delimiter: ;
-        SCH:
-          Literal: whatever
-          Operator: =
-          Keyword: CONT
-          Operator: -
-          Time: 10:00
-          Delimiter: ;
-          COM:
-            Operator: #
-            Literal: take out laundry today
-            COM:
-              Operator: #
-              Literal: do not forget to separate dark and white
-      Delimiter: }
-      A:
-        WD: Wednesday
-        Delimiter: {
-        SCH:
-          Literal: whatever
-          Operator: =
-          Time: 8:00
-          Operator: -
-          Time: 9:00
-          Delimiter: ;
-          SCH:
-            Literal: whatever
-            Operator: =
-            Keyword: CONT
-            Operator: -
-            Time: 10:00
-            Delimiter: ;
-        Delimiter: }
-  B:
-    Keyword: Style
-    Delimiter: {
-    ST:
-      EL: heading_color
-      Operator: =
-      VAL: rose_pink
-      Delimiter: ;
-      ST:
-        EL: heading_color
-        Operator: =
-        VAL: rose_pink
-        Delimiter: ;
-    Delimiter: }
+.\run_generator.sh
 ```
 
-### Example of test case that would throw syntax error - second time cannot be CONT.:
-Monday{whatever=8:00-9:00;whatever=CONT-CONT;}Tuesday{whatever=8:00-9:00;whatever=CONT-10:00;#take out laundry today # do not forget to separate dark and white } Wednesday{whatever=8:00-9:00;whatever=CONT-10:00;} </br>
-Output: 
+## Sample Input Programs
+
+### Correct Test Case
+Monday{work=9:00-11:00;study=CONT-1:00;} Style{heading_color=rose_pink;}
+
+Expected output.html: 
 ```
-Syntactic error at 12.
+<!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed
+            }
+            th {
+                text-align: left;
+                padding: 10px;
+                border: 1px solid black;
+            }
+            td {
+                padding: 8px;
+                border: 1px solid black;     
+            }
+            tr {
+                display: table-row;
+            }
+              
+        </style>
+    </head>
+    <body>
+        <table><tr><th colspan='2'>Monday</th></tr><tr><td>9:00-11:00</td><td>work</td></tr><tr><td>11:00-1:00</td><td>study</td></tr></table><br>
+    </body>
+    </html>
 ```
 
-### Another sample of correct input:
-Thursday{lecture=9:00-10:30;study=CONT-12:00;# Complete homework}
+### Correct Test Case: multiple comments 
+Tuesday{task=8:00-9:00;task=CONT-10:00;#first comment #nested comment inside}
+
+Expected output.html: 
 ```
-S:
-  A:
-    WD: Thursday
-    Delimiter: {
-    SCH:
-      Literal: lecture
-      Operator: =
-      Time: 9:00
-      Operator: -
-      Time: 10:30
-      Delimiter: ;
-      SCH:
-        Literal: study
-        Operator: =
-        Keyword: CONT
-        Operator: -
-        Time: 12:00
-        Delimiter: ;
-        COM:
-          Operator: #
-          Literal: Complete homework
-    Delimiter: }
+<!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed
+            }
+            th {
+                text-align: left;
+                padding: 10px;
+                border: 1px solid black;
+            }
+            td {
+                padding: 8px;
+                border: 1px solid black;     
+            }
+            tr {
+                display: table-row;
+            }
+              
+        </style>
+    </head>
+    <body>
+        <table><tr><th colspan='2'>Tuesday</th></tr><tr><td>8:00-9:00</td><td>task</td></tr><tr><td>9:00-10:00</td><td>task<br><span style='color: gray; font-size: smaller;'>first comment </span><br><span style='color: gray; font-size: smaller;'>nested comment inside</span></td></tr></table><br>
+    </body>
+    </html>
 ```
 
-### Example of another error - missing semicolon: 
-Friday{task1=8:00-9:00 task2=10:00-11:00;}Style{font_color=red;}
+### Correct Test Case: multiple days
+Monday{work=9:00-11:00;study=CONT-1:00;}Tuesday{work=12:00-5:00;family time=CONT-8:00;}
+
+Expected output.html: 
 ```
-Syntactic error at 6.
+<!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed
+            }
+            th {
+                text-align: left;
+                padding: 10px;
+                border: 1px solid black;
+            }
+            td {
+                padding: 8px;
+                border: 1px solid black;     
+            }
+            tr {
+                display: table-row;
+            }
+              
+        </style>
+    </head>
+    <body>
+        <table><tr><th colspan='2'>Monday</th></tr><tr><td>9:00-11:00</td><td>work</td></tr><tr><td>11:00-1:00</td><td>study</td></tr></table><br><table><tr><th colspan='2'>Tuesday</th></tr><tr><td>12:00-5:00</td><td>work</td></tr><tr><td>5:00-8:00</td><td>family time</td></tr></table><br>
+    </body>
+    </html>
 ```
 
-### Example of correct input - nexted schedule and multiple comments: 
-Tuesday{meeting=10:00-11:00;work=11:00-12:00;# Prepare slides # Check projector}Style{heading_color=rose_pink;} 
+### Correct Test Case 
+Monday{work=9:00-11:00;study=CONT-1:00;}Tuesday{work=12:00-5:00;family time=CONT-8:00;}Wednesday{meeting=10:00-12:00; #bring USB cord}
+
+Expected output.html: 
 ```
-S:
-  A:
-    WD: Tuesday
-    Delimiter: {
-    SCH:
-      Literal: meeting
-      Operator: =
-      Time: 10:00
-      Operator: -
-      Time: 11:00
-      Delimiter: ;
-      SCH:
-        Literal: work
-        Operator: =
-        Time: 11:00
-        Operator: -
-        Time: 12:00
-        Delimiter: ;
-        COM:
-          Operator: #
-          Literal: Prepare slides
-          COM:
-            Operator: #
-            Literal: Check projector
-    Delimiter: }
-  B:
-    Keyword: Style
-    Delimiter: {
-    ST:
-      EL: heading_color
-      Operator: =
-      VAL: rose_pink
-      Delimiter: ;
-    Delimiter: }
+<!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed
+            }
+            th {
+                text-align: left;
+                padding: 10px;
+                border: 1px solid black;
+            }
+            td {
+                padding: 8px;
+                border: 1px solid black;     
+            }
+            tr {
+                display: table-row;
+            }
+              
+        </style>
+    </head>
+    <body>
+        <table><tr><th colspan='2'>Monday</th></tr><tr><td>9:00-11:00</td><td>work</td></tr><tr><td>11:00-1:00</td><td>study</td></tr></table><br><table><tr><th colspan='2'>Tuesday</th></tr><tr><td>12:00-5:00</td><td>work</td></tr><tr><td>5:00-8:00</td><td>family time</td></tr></table><br><table><tr><th colspan='2'>Wednesday</th></tr><tr><td>10:00-12:00</td><td>meeting<br><span style='color: gray; font-size: smaller;'>bring USB cord</span></td></tr></table><br>
+    </body>
+    </html>
 ```
 
+### Incorrect Test Case 
+Monday{work=9:00-11:00Tuesday{work=12:00-5:00;family time=CONT-8:00;}Wednesday{meeting=10:00-12:00; #bring USB cord}
+
+Expected output (no html generated): 
+```
+Lexical Analysis...
+Tokens: [('Keyword', 'Monday'), ('Delimiter', '{'), ('Literal', 'work'), ('Operator', '='), ('Time', '9:00'), ('Operator', '-'), ('Time', '11:00'), ('Keyword', 'Tuesday'), ('Delimiter', '{'), ('Literal', 'work'), ('Operator', '='), ('Time', '12:00'), ('Operator', '-'), ('Time', '5:00'), ('Delimiter', ';'), ('Literal', 'family time'), ('Operator', '='), ('Keyword', 'CONT'), ('Operator', '-'), ('Time', '8:00'), ('Delimiter', ';'), ('Delimiter', '}'), ('Keyword', 'Wednesday'), ('Delimiter', '{'), ('Literal', 'meeting'), ('Operator', '='), ('Time', '10:00'), ('Operator', '-'), ('Time', '12:00'), ('Delimiter', ';'), ('Operator', '#'), ('Literal', 'bring USB cord'), ('Delimiter', '}')]
+Parsing...
+Parsing Error: Syntactic error at 7.
+
+```
+
+## Code Generator Steps
+
+CodeGenerator class takes ast passed as parameter and creates a html visualization. 
+
+In the generate function, the ast is traversed. The results populate the styles and body_content strings which are inserted into html skeleton code.
+
+The traverse function itself recursively traverses AST nodes. We designed our AST nodes to have types depending on their role in our CFG. We can now (recursively if necessary) traverse node type A to extract schedule information and node type B to extract style information.
+Children are processed differently depending on their type. For example, if a child of type WD (weekday) is identified, a new table is added to the html body. Separate functions have been defined for children of type that require more complex processing.
+
+The first of these would be the process_schedule function. This will parse out the tasks and their start and end times, adding them to the html body string as well. Any nested schedules will be recursively processed.
+The extract_comments function will similarly parse out comments from nodes type COM and add to output with a different style.
+
+Finally, the resulting html code is written to a file and opened on a browser in save_to_file and execute.
+All these processes are triggered in the run_pipeline function.
 ### Demo Video:
 https://columbia.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=03eca195-300f-4a0a-90a0-b226005341a8
-
-## Programming Assignment 1
-
-## Team members: Anita Bui-Martinez (adb2221) and Ashley Cho (hc3455)
-
-### To run: 
-Ensure python is installed <br/>
-You can do this on Windows or Mac by downloading from: https://www.python.org/downloads/ <br/> 
-run `python scanner.py`
-
-### Lexical Grammar: <br/>
-Keywords: Monday | Tuesday | Wednesday | Thursday | Friday | Saturday | Sunday | Style | CONT | heading_color | rose_pink <br/>  
-Note: for now, we will only implement heading color and color value and add more if successful <br/>
-Literals: [A-Za-z0-9  ]+ <br/>
-Times: ([0-1][0-9] | 2[0-3]):[0-5][0-9] <br/>
-Delimiters:  { | } | ;  <br/>
-Operators: - | = | # <br/>
-
-Sample inputs that work: <br/>
-"Get Ready"= CONT-9:00; <br/>
-
-```
-<Delimiter, """> 
-<Literal, "Get Ready">
-<Delimiter, """>
-<Operator, "=">
-<Keyword, "CONT">
-<Operator, "-">
-<Time, "9:00">
-<Delimiter, ";">
-```
-
-Monday 12:30 <br/>
-
-```
-<Keyword, "Monday">
-<Time, "12:30">
-```
-
-Garfield ate a lasagna <br/>
-
-```
-<Literal, "Garfield ate a lasagna">
-```
-
-Garfield ate a CONT lasagna <br/>
-
-```
-<Literal, "Garfield ate a ">
-<Keyword, "CONT">
-<Literal, "lasagna">
-```
-
-Style{heading_color=rose_pink;} <br/>
-
-```
-<Keyword, "Style">
-<Delimiter, "{">
-<Keyword, "heading_color">
-<Operator, "=">
-<Keyword, "rose_pink">
-<Delimiter, ";">
-<Delimiter, "}">
-```
-12@30 
-
-```
-Unrecognized character. We are at position 3
-<Literal, "12">
-```
-
-## Description of each step: <br/>
-
-The lexer uses a state machine with different states (S0, KEYWORD_OR_LITERAL, TIME, ERROR) to process the input. Each state defines a specific behavior based on the character being read:
-
-S0 (Initial State):
-The lexer starts in state S0 and reads each character from the input.
-If it reads an alphabetic character or an underscore (_), it transitions to KEYWORD_OR_LITERAL and starts collecting characters for a possible keyword or literal.
-If it reads a digit, it transitions to the TIME state and begins parsing a time token.
-If it reads a delimiter or operator, it directly appends the token to the tokens list and remains in state S0.
-If an unrecognized character is encountered, it transitions to the ERROR state.
-
-KEYWORD_OR_LITERAL (S1):
-This state evaluates whether the current characters form a keyword or a literal.
-If a keyword is found within the collected string, it splits the string into a literal (if any) and the keyword, appending both to the tokens list.
-If no keyword is found, it continues appending characters until a delimiter, operator, or space is encountered, at which point the collected string is assumed to be a literal.
-
-TIME (S2):
-This state attempts to parse a valid time in the format HH:MM.
-It checks if the characters form a valid hour and minute combination. If they do, it appends the token as Time. If the characters do not match the time format, it transitions back to KEYWORD_OR_LITERAL since the digits could be part of a literal instead.
-ERROR:
-
-When the lexer encounters an unrecognized character, it moves to the ERROR state and prints an error message indicating the position of the problematic character in the input. This halts further processing.
-
-After appending tokens it outputs them along with their token type. 

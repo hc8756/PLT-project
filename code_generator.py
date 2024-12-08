@@ -58,8 +58,8 @@ class CodeGenerator:
                     self.body_content += f"<table><tr><th colspan='2'>{child.value}</th></tr>"
                 elif child.node_type == "SCH":
                     self.process_schedule(child)
-                elif child.node_type == "COM":
-                    self.process_comment(child)
+                #elif child.node_type == "COM":
+                   # self.process_comment(child)
             self.body_content += "</table><br>"
             for child in node.children:
                 if child.node_type == "A":
