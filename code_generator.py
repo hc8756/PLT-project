@@ -58,8 +58,6 @@ class CodeGenerator:
                     self.body_content += f"<table><tr><th colspan='2'>{child.value}</th></tr>"
                 elif child.node_type == "SCH":
                     self.process_schedule(child)
-                #elif child.node_type == "COM":
-                   # self.process_comment(child)
             self.body_content += "</table><br>"
             for child in node.children:
                 if child.node_type == "A":
@@ -112,19 +110,6 @@ class CodeGenerator:
 
                 comment_content += self.extract_comments(child)
         return comment_content
-
-    def process_comment(self, node):
-        # process comment node
-        if node is None:
-            return
-
-        # get the text 
-        comment = node.children[1].value
-        self.body_content += f"<tr><td colspan='2' style='color: gray; font-size: smaller;'>{comment}</td></tr>"
-
-        for child in node.children:
-            if child.node_type == "COM":
-                self.process_comment(child)
 
     def save_to_file(self, filename="output.html"):
         # save generated code to file (to be presented as html)
